@@ -3,12 +3,19 @@ extern crate argparse;
 use argparse::ArgumentParser;
 use argparse::Store;
 
+
 mod calc_interest;
-//mod min_max;
+mod min_max;
+mod marks;
 
-fn main() {
+#[allow(dead_code)]
+fn min_max_main() {
+	min_max::min_max();
+}
 
-//	min_max::min_max();
+#[allow(dead_code)]
+fn calc_interest_main() {
+
 	let mut principal :f64 = 0.0;
 	let mut time :f32 = 1.0;	//time in years
 	let mut rate :f32 = 0.0;
@@ -29,4 +36,9 @@ fn main() {
 	let ci = calc_interest::calc_comp_interest(principal, time, rate, 2);
 
 	println!("Simple interest = {} and Compound Interest = {}", si, ci);
+}
+
+fn main() {
+	
+	marks::process_marks_sheet("resources/student_marks_sheet.txt");
 }
