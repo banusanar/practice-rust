@@ -31,8 +31,7 @@ impl FromStr for Student {
 	type Err = ParseIntError;
 
 	fn from_str(s: &str) -> Result<Self, Self::Err> {
-		let tokens: Vec<&str> = s.split(':')
-								.collect();
+		let tokens: Vec<&str> = s.split(':').collect();
 		println!("tokens {:?}", tokens);	//This uses the #Debug print feature
 		let l_name = tokens[0];
 		let l_marks = tokens[1].trim().parse::<i32>()?;
