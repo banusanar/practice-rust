@@ -2,6 +2,7 @@
 extern crate argparse;
 extern crate expressions;
 use expressions::calling_external;
+//use expressions::math::time_per_floor;
 use argparse::ArgumentParser;
 use argparse::Store;
 
@@ -96,7 +97,8 @@ fn multiplication_main() {
 	multiplications::multiplication_table(multiples, rows);
 }
 
-fn main() {
+#[allow(dead_code)]
+fn binary_main() {
 	let args : Vec<String> = env::args().collect();
 		//args[0] is the task name
 	if args.len() != 2
@@ -108,6 +110,37 @@ fn main() {
 	binary::convert_to_octal(input8);
  
 	calling_external();
+}
+
+#[allow(dead_code)]
+fn topfloor_main() {
+	let args : Vec<String> = env::args().collect();
+		//args[0] is the task name
+	if args.len() != 3
+	{ println!("Please input top floor and the height of each floor"); exit(0);}
+
+	let topfloor = i8::try_from(num_parse(&args[1])).unwrap();
+	let height = i8::try_from(num_parse(&args[2])).unwrap();
+	
+	for x in (0..topfloor).rev()
+	{
+		let timet = expressions::math::time_per_floor(topfloor, height, x);
+		println!("floor {} : time taken to reach {}", x, timet);
+	}
+}
+
+fn main() {
+	let args : Vec<String> = env::args().collect();
+		//args[0] is the task name
+	if args.len() != 4
+	{ println!("Please input lhs and rhs and operand"); exit(0);}
+
+	let lhs = i32::try_from(num_parse(&args[1])).unwrap();
+	let rhs = i32::try_from(num_parse(&args[2])).unwrap();
+	let operand = String::from(&args[3]);
+
+	let res = expressions::math::calc_expression::<i32>(lhs, rhs, &operand);
+	println!("Result: {}", res)
 }
 
 
