@@ -1,8 +1,5 @@
-
-[package]
-name = "practice-btech"
-version = "1.0.0"
-authors = ["Banu Guthikonda"]
-
-[dependencies]
-argparse = "0.2.2"
+[workspace]
+members=[
+	"main-app", 
+	"expressions"
+]

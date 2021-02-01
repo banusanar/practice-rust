@@ -1,0 +1,8 @@
+[package]
+name = "practice"
+version = "1.0.0"
+authors = ["Banu Guthikonda <banu@mailworks.org>"]
+
+[dependencies]
+argparse = "0.2.2"
+expressions = { path = "../expressions", version = "1.0.0"}

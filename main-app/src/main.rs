@@ -1,5 +1,7 @@
 
 extern crate argparse;
+extern crate expressions;
+use expressions::calling_external;
 use argparse::ArgumentParser;
 use argparse::Store;
 
@@ -105,6 +107,7 @@ fn main() {
 	binary::convert_to_binary(inputb);
 	binary::convert_to_octal(input8);
  
+	calling_external();
 }
 
 
