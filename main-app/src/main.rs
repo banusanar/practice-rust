@@ -1,7 +1,6 @@
 
 extern crate argparse;
 extern crate expressions;
-use expressions::calling_external;
 //use expressions::math::time_per_floor;
 use argparse::ArgumentParser;
 use argparse::Store;
@@ -108,8 +107,6 @@ fn binary_main() {
 	let input8 = u64::try_from(num_parse(&args[1])).unwrap();
 	binary::convert_to_binary(inputb);
 	binary::convert_to_octal(input8);
- 
-	calling_external();
 }
 
 #[allow(dead_code)]
@@ -131,7 +128,7 @@ fn topfloor_main() {
 
 fn main() {
 	let args : Vec<String> = env::args().collect();
-		//args[0] is the task name
+			//args[0] is the task name
 	if args.len() != 4
 	{ println!("Please input lhs and rhs and operand"); exit(0);}
 
@@ -141,6 +138,7 @@ fn main() {
 
 	let res = expressions::math::calc_expression::<i32>(lhs, rhs, &operand);
 	println!("Result: {}", res)
+	
 }
 
 

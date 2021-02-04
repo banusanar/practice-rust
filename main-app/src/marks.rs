@@ -15,7 +15,7 @@ use std::str::FromStr;
 use std::fmt;
 
 #[derive(Debug, PartialEq)]
-struct Student {
+pub struct Student {
 	name: String,
 	marks:i32,
 	class: String
@@ -40,25 +40,28 @@ impl FromStr for Student {
 }	
 
 
-pub fn process_marks_sheet(filename :&str) {
-
+pub fn process_marks_sheet(filename :&str) -> Vec<Student>
+{
 	let contents : Vec< Result<Student, <Student as FromStr>::Err> > = 
 				fs::read_to_string(filename)
 					.expect("Read error from file")
 					.lines()
 					.map(|x| x.parse())
 					.collect();
+	let mut students : Vec< Student> = Vec::new();
 	for stud in contents
 	{
 		match stud {
 			Ok(mut s) => {	//mutable can be done on a non-mutable top level element
 							// const vector containing const elements is no longer true
 				s.class = get_class_for_marks(s.marks);
-				println!("{}",s)	//This uses the fmt::display implemented for Student
+				println!("{}",s);	//This uses the fmt::display implemented for Student
+				students.push(s);
 				},
 			Err(e) => println!("{}", e) 
 		}
 	}
+	students
 }
 
 fn get_class_for_marks(marks :i32) -> String {
@@ -68,5 +71,19 @@ fn get_class_for_marks(marks :i32) -> String {
 		x if x>=60 && x<70 => String::from("First class"),
 		x if x>=70 && x<=100 => String::from("Distinction"),
 		_ => String::from("Invalid marks")
+	}
+}
+
+#[test]
+fn t_marks() {
+	let students = process_marks_sheet("resources/student_marks_sheet.txt");
+	for stud in students {
+		match stud.marks {
+			x if x<40 => assert_eq!(stud.class, "Fail"), 
+			x if x>=40 && x<60 => assert_eq!(stud.class,"Second class"),
+			x if x>=60 && x<70 => assert_eq!(stud.class,"First class"),
+			x if x>=70 && x<=100 => assert_eq!(stud.class,"Distinction"),
+			_ => assert_eq!(stud.class,"Invalid marks")
+		}
 	}
 }
