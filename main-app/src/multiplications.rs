@@ -7,9 +7,8 @@
 *
 */
 
-pub fn multiplication_table(multiples:i32, rows:i32) {
-	
-	for factor in 1..(rows + 1) {
-		println!("{} x {} = {}", multiples, factor, multiples * factor)
-	} 
+pub fn multiplication_table(multiples: i32, rows: i32) {
+    for factor in 1..(rows + 1) {
+        println!("{} x {} = {}", multiples, factor, multiples * factor)
+    }
 }

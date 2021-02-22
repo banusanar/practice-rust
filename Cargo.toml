@@ -1,5 +1,6 @@
 [workspace]
 members=[
 	"main-app", 
-	"expressions"
+	"expressions",
+	"leetcode"
 ]
